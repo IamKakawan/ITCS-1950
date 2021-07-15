@@ -1,0 +1,194 @@
+# Prog Name : Homework7.py
+# Developer Name : ITCS 1950(Kevin Karawan)
+# Date : 6/19/2021
+# Description : This resource contains code for creation of the army list. The army list will keep track of class units that the player has purchased during the campaign.
+# There will be options to purchase units inbetween scenes of the game. If the player wins the enemy army list will be cleared to make room for the next scenes army list. enemyarmy [] will be recycled every scene.
+
+import random
+
+#creation of list of player troop objects
+playerarmy = []
+
+#creation of list of enemy troop objects
+enemyarmy = []
+
+### Start of player unit classes###   
+class Riflemen:
+    atk = 3
+    defense = 200
+    
+    #add riflemen units to army
+    def AddRiflemen(units):
+        x=0
+        while x < units:
+            y = Riflemen()
+            playerarmy.append(y)
+            x=x+1
+    
+class Cavalry:
+    atk = 5
+    defense = 400
+
+    #add cavalry units to army
+    def AddCavalry(units):
+        x=0
+        while x < units:
+            y = Cavalry()
+            playerarmy.append(y)
+            x=x+1
+
+class Cannon:
+    atk = 11
+    defense = 150
+    
+    #add cannon units to army
+    def AddCannon(units):
+        x=0
+        while x < units:
+            y = Cannon()
+            playerarmy.append(y)
+            x=x+1
+
+###End of player unit classes###
+
+###Start of enemy unit classes###
+            
+class EnemyRiflemen:
+    atk = 3
+    defense = 200
+    
+    #add riflemen units to army
+    def AddEnemyRiflemen(units):
+        x=0
+        while x < units:
+            y = EnemyRiflemen()
+            enemyarmy.append(y)
+            x=x+1
+    
+class EnemyCavalry:
+    atk = 11
+    defense = 400
+
+    #add cavalry units to army
+    def AddEnemyCavalry(units):
+        x=0
+        while x < units:
+            y = EnemyCavalry()
+            enemyarmy.append(y)
+            x=x+1
+
+class EnemyCannon:
+    atk = 11
+    defense = 150
+    
+    #add cannon units to army
+    def AddEnemyCannon(units):
+        x=0
+        while x < units:
+            y = EnemyCannon()
+            enemyarmy.append(y)
+            x=x+1
+
+###End of player unit classes###
+            
+#sum the atk attribute of all objects in the army list
+def GetArmyAtk():
+
+    sum = 0
+    for x in range(len(playerarmy)):
+        sum = sum + getattr(playerarmy[x], 'atk')
+    return sum
+
+#sum the defense attribute of all objects in the army list
+def GetArmyDefense():
+
+    sum = 0
+    for x in range(len(playerarmy)):
+        sum = sum + getattr(playerarmy[x], 'defense')
+    return sum
+
+
+#sum the atk attribute of all objects in the enemy army list
+def GetEnemyArmyAtk():
+
+    sum = 0
+    for x in range(len(enemyarmy)):
+        sum = sum + getattr(enemyarmy[x], 'atk')
+    return sum
+
+#sum the defense attribute of all objects in the enemy army list
+def GetEnemyArmyDefense():
+
+    sum = 0
+    for x in range(len(enemyarmy)):
+        sum = sum + getattr(enemyarmy[x], 'defense')
+    return sum
+
+#sum the player's army size
+def GetArmySize():
+
+    sum = 0
+    for x in range(len(playerarmy)):
+        sum = sum + 1
+    return sum
+
+#sum the enemy's army size
+def GetEnemyArmySize():
+
+    sum = 0
+    for x in range(len(enemyarmy)):
+        sum = sum + 1
+    return sum
+
+#player Damage calculation, adds a chance to miss.
+def PlayerDamage(playerAttack):
+    return playerAttack*random.uniform(.90,.99)
+
+#enemy Damage calculation, adds a slightly higher chance to miss.
+def EnemyDamage(enemyAttack):
+    return enemyAttack*random.uniform(.88,.96)
+    
+#Adding units for testing, units are equals to both sides to ensure the Damage Functions are working with a chance to miss.    
+Riflemen.AddRiflemen(100)
+Cannon.AddCannon(10)
+EnemyRiflemen.AddEnemyRiflemen(100)
+EnemyCannon.AddEnemyCannon(10)
+
+#printing results for testing purposes
+print("Army size is : " + str(GetArmySize()))
+print("Enemy army size is : " + str(GetEnemyArmySize()))
+print("Army attack is : " + str(GetArmyAtk()))
+print("Army defense is : " + str(GetArmyDefense()))
+print("Enemy army attack is : " + str(GetEnemyArmyAtk()))
+print("Enemy army defense is : " + str(GetEnemyArmyDefense()))
+
+# Battle Simulation
+def Battle(enemyAttack, enemyDefense, playerAttack, playerDefense):
+    
+    enemyDamage = EnemyDamage(enemyAttack)
+    playerDamage = PlayerDamage(playerAttack)
+
+    while playerAttack < enemyDefense:
+        enemyDamage = enemyAttack*random.uniform(.88,.96) + enemyDamage
+        playerDamage = playerAttack*random.uniform(.90,.99) + playerDamage
+
+        remainingPlayerDefense = playerDamage - enemyDefense
+        remainingEnemyDefense = enemyDamage - playerDefense
+        
+        
+        if playerDamage > enemyDefense:
+            print("damage done by you is " + str(playerDamage))
+            print("damage done by the enemy is " + str(enemyDamage))
+            print("remaining player defense is : " + str(remainingPlayerDefense))
+            print("remaining enemy defense is : " + str(remainingEnemyDefense))
+            del enemyarmy[:]
+            return "player"
+                
+
+        elif enemyDamage > playerDefense:
+            print("damage done by you is " + str(playerDamage))
+            print("damage done by the enemy is " + str(enemyDamage))
+            return "enemy"
+        
+
+Battle(GetEnemyArmyAtk(), GetEnemyArmyDefense(), GetArmyAtk(), GetArmyDefense())
