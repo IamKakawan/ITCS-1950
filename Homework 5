@@ -1,0 +1,92 @@
+# Prog Name : Homework5.py
+# Developer Name : ITCS 1950(Kevin Karawan)
+# Date : 6/7/2021
+# Description : This program is a version of the dragon realm game. A user chooses from 4 options and will randomly go through a cave with a corresponding output.
+
+
+import random
+import time
+
+
+def DisplayIntro():
+    print('''You are in a land full of dragons. In front of you, you see four caves. In one cave, the dragon is friendly and will share his treasure with you. The other dragon is greedy and hungry, and will eat you on sight. The other
+cave will lead to a forgotten land, and the other cave is full of traps''')
+    time.sleep(3)
+    print()
+
+def ChooseCave():
+    cave = ''
+    while cave != '1' and cave != '2' and cave != '3' and cave != '4'  :
+        print('Which cave will you go into? (1, 2, 3, or 4?)')
+        cave = input()
+        return cave
+
+def CheckCave(chosenCave):
+    print('You approach the cave...')
+    time.sleep(2)
+    print('It is dark and spooky...')
+    time.sleep(2)
+    
+#creates a local list of random integers and fills the list with non-repeating random integers in the range of 1-4. The list is recreated every new play through due to the list being local to the CheckCave function.
+    caves = random.sample(range(1,5),4)
+
+#The friendly cave is equal to the integer in index 0 of the caves list
+    friendlyCave = caves[0]
+
+#The traoscave is equal to the integer in index 1 of the caves list
+    trapsCave = caves[1]
+
+#The newAreaCave is equal to the integer in index 2 of the caves list
+    newAreaCave = caves[2]
+
+#The gobblecave is equal to the integer in index 3 of the caves list
+    gobbleCave = caves[3]
+    print()
+
+    
+    if chosenCave == str(friendlyCave):
+        print('''A large dragon jumps out in front of you! He opens his jaws
+and...''')
+        print()
+        time.sleep(2)
+        print('Gives you his treasure!')
+        print()
+        time.sleep(2)
+#else if chosenCave is equal to trapsCave        
+    elif chosenCave == str(trapsCave):
+        print('the floor begins to shake....')
+        print()
+        time.sleep(2)
+        print('You fell through a trap door and are stuck forever!')
+        print()
+        time.sleep(2)
+#else if chosenCave is equal to newAreaCave
+    elif chosenCave == str(newAreaCave):
+        print('There is a thick fog and a light at the end of the cavern...')
+        print()
+        time.sleep(2)
+        print('You make your way through the fog and....')
+        print()
+        time.sleep(2)
+        print('You have discovered a forgotten land!')
+        print()
+        time.sleep(2)    
+    elif chosenCave == str(gobbleCave):
+        print('''A large dragon jumps out in front of you! He opens his jaws
+and...''')
+        print()
+        time.sleep(2)
+        print('Gobbles you down in one bite!')
+        print()
+        time.sleep(2)
+
+playAgain = 'yes'
+while playAgain =='yes' or playAgain =='y':
+    DisplayIntro()
+    caveNumber = ChooseCave()
+    CheckCave(caveNumber)
+    print('Do you want to play again? (yes or no)')
+    playAgain = input()
+    print()
+
+
