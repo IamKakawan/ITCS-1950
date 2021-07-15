@@ -1,0 +1,219 @@
+# Prog Name : Projectskeleton.py
+# Developer Name : ITCS 1950 (Kevin Karawan)
+# Date : 6/11/21
+# Description : This program is a rough draft of my game project. Most of the functions are defined.
+# The skeleton takes you through the introduction level if the game.
+
+import time
+import sys
+import random
+
+riflemen = 0
+playerAttack = 0
+playerDefense = 0
+playerDamage = 0
+playerUnits = 0
+enemyDamage = 0
+enemyDefense = 0
+enemyAttack = 0
+enemyUnits = 0
+
+
+
+######## Gives the AI and the player a chance to miss their target during battle.
+
+def HitMissChance():
+    global HitMiss
+    HitMiss = random.randint(90,100)
+    return HitMiss
+
+######## Creates a time delay when printing. Creates a more authentic experinence.
+
+def TypeDelay(string):
+    for l in string:
+        sys.stdout.write(l)
+        sys.stdout.flush()
+        time.sleep(.01)
+########
+
+def BattleResult():
+    global playerDamage
+    global enemyDamage
+    if playerDamage >= enemyDamage:
+        return "player"
+    else:
+        return "enemy"
+
+######## Battle simulator. This takes the attack and defense of both the player along with the number of units and does a calculation to determine the outcome of the battle. There is a chance to miss the targets as well.
+    
+def Battle(enemyAttack, enemyDefense, playerAttack, playerDefense, enemyUnits, playerUnits):
+    global enemyDamage
+    global playerDamage
+    enemyDamage = (enemyAttack * playerUnits)/random.randint(90,100)
+    playerDamage = (playerAttack * enemyUnits)/random.randint(93,100)
+    return BattleResult()
+    
+
+########
+
+def Intro():
+    yearLine = '''
+The year is 1755.'''
+    TypeDelay(yearLine)
+    print()
+    introLine = '''
+    The intensity of the French and Indian war grows daily.
+    The Massachussetts Militia has been revived for the war effort.
+    You have been named Major of the 3rd regiment of the Massachussetts Militia.
+    Your name is Artemis Ward, and your story begins here.
+
+'''
+    TypeDelay(introLine)
+
+########
+        
+def Scene1():
+    
+    dateLine = 'October, 1755.'
+    
+    TypeDelay(dateLine)
+    print()
+    
+    openingLine = '''
+    You are suddenly awaken by your Luitenant.
+    He informs you there has been an attack on the garrison by a force
+    of 100 Apache warriors.
+    Your regiment is in disarray.
+    You must muster your men and repel the Apache attack on the garrison.
+    You run out of the barracks and enter the camp.
+    Troops are scattered and running towards the armory and the battlefield.
+    
+    Will you go to the armory or the battlefield?
+
+    '''
+    
+    TypeDelay(openingLine)
+
+    choice = input()
+    
+#Battlefield choice tree
+    
+    if choice == "battlefield" or choice == "Battlefield":
+        global riflemen
+        riflemen = riflemen + 100
+        battlefieldText = '''
+    You make your way to the battlefield and have mustered 100 riflemen
+    You order the riflemen into 4 squads of 25, and order an attack.
+    Your men fire at the enemy, firing line after firing line.
+    You fearlessly lead the troops into battle.
+    There battle rages for over hours.
+    Time and time again, you manage to save your troops from certain death.
+
+    '''
+        
+        TypeDelay(battlefieldText)
+        
+#The first battle will nearly always result in a win
+        result = Battle(1,1,2,2,100,150)
+            
+        if result == "player":
+            
+            winText = ('''Your men faught valliantly, and they have defeated the Apache attackers
+    The men gather around you.
+    Men tell you how greatful they are for your courage.
+    That night there is a celebration throughout the camp.
+
+''')
+            TypeDelay(winText)
+            
+        else:
+            loseText = ('''
+    Your men faught with courage and integrity, but the garrison has fallen.
+    Would you like to continue?
+
+    ''')
+            
+            TypeDelay(loseText)
+            
+            retry = input()
+            
+            if retry == "yes":
+                print()
+                Scene1()
+            else:
+                sys.exit()
+            
+#Armory choice tree         
+    elif choice == "armory" or choice == "Armory":
+        riflemen = riflemen + 150
+        armoryText = '''
+    You make your way to the armory and found James the trumpeter.
+    You have ordered James to muster the troops at the armory.
+    150 riflemen have mustered at the armory.
+    You fearlessly lead the troops into battle.
+    There battle rages for over hours.
+    Time and time again, you manage to save your troops from certain death.
+    
+    '''
+        
+        TypeDelay(armoryText)
+            
+        result = Battle(1,1,2,2,100,150)
+        
+        if result == "player":
+            winText = ('''Your men faught valliantly, and they have defeated the Apache attackers.
+    The men gather around you.
+    Men tell you how greatful they are for your courage.
+    That night there is a celebration throughout the camp.
+
+''')
+            TypeDelay(winText)
+            
+        else:
+            loseText = ('''
+    Your men faught with courage and integrity, but the garrison has fallen.
+    Would you like to continue?
+
+    ''')
+            TypeDelay(loseText)
+            
+            retry = input()
+            
+            if retry == "yes" or retry == "y":
+                print()
+                Scene1()
+            else:
+                sys.exit()
+    else:
+        elseText = '''
+    You have been struck with a musketball.
+    Your story ends here.
+    Would you like to try again?
+    
+    '''
+         
+        TypeDelay(elseText)
+
+        retry = input()
+            
+        if retry == "yes" or retry == "y":
+            print()
+            Scene1()
+        else:
+            sys.exit()
+
+########
+
+def Main():
+   print('''We the people
+Developed by Kevin Karawan
+
+    ''')
+   Intro()
+   Scene1()
+    
+########
+
+
+Main()
+
