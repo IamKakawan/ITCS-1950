@@ -1,0 +1,58 @@
+# Prog Name : Homework3.py
+# Developer Name : ITCS 1950(Kevin Karawan)
+# Date : 5/29/2021
+# Description : This progtram will compute the area or perimeter of a rectangle
+
+#Defines the CalcArea Function that passes two arguments, preforms the calculations to get the area, then returns the result
+def CalcArea(length, width):
+    area = length * width
+    return area
+
+#Defines the CalcPerimeter Function that passes two arguments, preforms the calculations to get the perimeter, then returns the result
+def CalcPerimeter(length, width):
+    perimeter = 2 *(length + width)
+    return perimeter
+
+#Starts by asking if the user wants to calculate the area or the perimeter
+print('would you like to calculate the area of a rectangle or the perimeter of a rectangle for professor Schleis?')
+response = input()
+
+#If the response is yes the program asks if the user wants to calculate the area or perimeter of a rectangle, or both
+if response == "yes":
+    print("would you like to calculate the area of a rectangle or the perimeter of a rectangle, or both?")
+    response = input()
+    
+    #If the user responds with "area", we obtain the length and width from the user via input then we print the CalcArea
+    #function result using the length and width provided by the user
+    if response == "area":
+        print("what is the length?")
+        length = int(input())
+        print("what is the width?")
+        width = int(input())
+        print("The area is " + str(CalcArea(length, width)))
+        
+    #else if the user responds with "area", we obtain the length and width from the user via input then we print
+    #the CalcPerimeter function result using the length and width provided by the user
+    elif response == "perimeter":
+        print("what is the length?")
+        length = int(input())
+        print("what is the width?")
+        width = int(input())
+        print("The perimeter is " + str(CalcPerimeter(length, width)))
+        
+    #else if the user responds with "both", we obtain the length and width from the user via input then we print
+    #the CalcPerimeter and CalcArea functions result using the length and width provided by the user    
+    elif response == "both":
+        print("what is the length?")
+        length = int(input())
+        print("what is the width?")
+        width = int(input())
+        print("The perimeter is " + str(CalcPerimeter(length, width)) + " and the area is " +str(CalcArea(length, width)))
+    # for all other input the program responds back with Sorry, I did not understand that.
+    else:
+        print("Sorry, I did not understand that.")
+        
+#If the user answered no, or anything other than yes to the initial question of running the program, the program responds back with
+#"Try again later"
+else:
+    print("Try again later")
