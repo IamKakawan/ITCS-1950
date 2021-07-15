@@ -1,0 +1,9 @@
+# Prog Name : hello.py
+# Developer Name : ITCS 1950 Kevin Karawan
+# Date : 5/25/221
+# Description : This program will print 'Hello World', ask for user input and then prints a reply with the user supplied input located in the myName variable
+
+print('Hello World')
+print('What is your name?')
+myName = input()
+print('It is good to meet you, '+ myName)
