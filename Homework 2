@@ -1,0 +1,15 @@
+# Prog Name : Homework2.py
+# Developer Name : ITCS 1950 (Kevin Karawan)
+# Date : 5/27/21
+# Description : This program says Hello World, introduces PythonBot and asks for the users name and age.
+# PythonBot responds back and says he is 2 years older than the user.
+
+print('Hello world!')
+print('My name is PythonBot,') 
+print('What is your name?')
+myName = input()
+print('It is good to meet you, ' + myName)
+print('How old are you?')
+age = input()
+pythonbotAge = int(age) + 2
+print('Really? i am 2 years older than you! I am ' + str(pythonbotAge) +' years old!') 
