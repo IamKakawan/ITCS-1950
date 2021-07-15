@@ -1,0 +1,70 @@
+# Prog Name : homework8.py
+# Developer Name : ITCS 1950 Kevin Karawan
+# Date : 6/27/2021
+# Description : This program uses a list and tuple. The list is used to add items the player says they need added to the shopping list.
+# The tuple is strictly for commands since they are immutable and do not need to be changed.
+# Depending on input items are either added or removed from the shopping list 
+
+import random
+
+#lists are mutable so they can expand when necessary.
+shopping_List = []
+#tuple is immutable so using it for the command options since they do not need to be changed.
+commands = ("add to cart", "check out", "done")
+
+def addToList():
+
+    command = input()
+    lwrCommand = command.lower()
+    
+    while lwrCommand != "done":
+        shopping_List.append(lwrCommand)
+        command = input()
+        lwrCommand = command.lower()
+
+def PrintShoppingList():
+    for x in range(len(shopping_List)):
+        print(shopping_List[x])
+
+def RandomItem():
+    item = random.choice(shopping_List)
+    return item
+
+def RemoveQuestion(lwrChoice, item):
+    
+    while lwrChoice != "yes" or lwrChoice != "y" or lwrChoice != "no" or lwrChoice != "n":
+        
+        if lwrChoice == "yes" or lwrChoice == "y":
+            print("ok, i dont see why we need more though. Remember to get all these then:")
+            PrintShoppingList()
+            print("have fun shopping")
+            break
+
+        elif lwrChoice == "no" or lwrChoice =="n":
+            print("ok, let me take that off the list. Remember to get all these then:")
+            shopping_List.remove(item)
+            PrintShoppingList()
+            print("have fun shopping")
+            break
+            
+        else:
+            print("what?")
+            choice = input()
+            lwrChoice = choice.lower()
+        
+def main():
+
+    print("We are going shopping today, can you add what you need to the list? When you finish say \"done\"")
+    addToList()
+    print("Here is your shopping list:")
+    PrintShoppingList()
+    randomItem = str(RandomItem())
+    print("we have " + str(randomItem) + " at home")
+    print("do we really need more?")
+    choice = input()
+    lwrChoice = choice.lower()
+    RemoveQuestion(lwrChoice, randomItem)
+
+main()
+
+
