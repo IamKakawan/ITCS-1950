@@ -1,0 +1,72 @@
+# Prog Name : Homework 4.py
+# Developer Name : ITCS 1950(Kevin Karawan)
+# Date : 6/3/2021
+# Description : This program will tell interactive jokes with the user. The programs responses are dependent on the users answers to the jokes.
+
+
+#Start of the snowman/vampire joke
+end = False
+
+while end is False:
+    print('What do you get when you cross a snowman with a vampire?')
+    response = input()
+    if response == '':
+        print("take a guess"+"\n")
+    elif response != '':
+        if response == "frostbite":
+            print("haha, you must have heard that before")
+            end = True
+        else: 
+            print("Frostbite")
+            end = True
+    else: 
+            print("Frostbite")
+            end = True
+#Start of the astronaunts cavity joke.
+end = False
+
+while end is False:
+    print('What do dentists call an astronaut\'s cavity?')
+    response = input()
+    if response == '':
+        print("take a guess"+"\n")
+    elif response != '':
+        if response == "a black hole":
+            print("haha, you must have heard that before")
+            end = True
+        else: 
+            print("A black hole!")
+            end = True
+    else: 
+            print("A black hole!")
+            end = True
+
+#Start of the interrupting cow joke.
+def InterruptingCow():
+    end = False
+    print('Interrupting cow.')
+    response = input()
+    while end is False:
+        if response != 'interrupting cow who':
+            print("Say interrupting cow who"+"\n")
+            response = input()
+        if response == "interrupting cow who":
+            print("MOO")
+            end = True
+
+def WhosThere():
+    end = False
+    print('Knock knock.')
+    response = input()
+    if response != "whos there":
+        print("Say who's there"+"\n")
+        WhosThere()
+    if response == "whos there":
+        InterruptingCow()
+
+WhosThere()
+
+#else:
+#    print('Frostbite!')
+#print()
+#print("haha, you must have heard that before")
